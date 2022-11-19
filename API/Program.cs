@@ -1,3 +1,4 @@
+using API.Middleware;
 using Application.Activities;
 using Application.Core;
 using AutoMapper;
@@ -25,6 +26,8 @@ builder.Services.AddMediatR(typeof(List.Handler).Assembly);
 builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
