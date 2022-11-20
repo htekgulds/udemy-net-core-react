@@ -6,6 +6,8 @@ using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
+using Steeltoe.Bootstrap.Autoconfig;
+using Steeltoe.Management.Endpoint;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +26,10 @@ builder.Services.AddDbContext<DataContext>(opt =>
 });
 builder.Services.AddMediatR(typeof(List.Handler).Assembly);
 builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+
+builder.AddSteeltoe();
+builder.AddLoggersActuator();
+builder.Services.AddSpringBootAdminClient();
 
 var app = builder.Build();
 
